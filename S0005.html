@@ -63,32 +63,21 @@ function getSaleStatusHTML() {
     }
 }
 
-// Function to create image HTML with srcset and zoom functionality
+// Function to create image HTML with srcset
 function createImageHTML(imageName, isEager = false) {
     if (!imageName) return "";
     
     const loading = isEager ? "" : 'loading="lazy"';
     return `
-        <div class="image-wrapper">
-            <img srcset="${imageName}_600.jpg 600w, 
-                         ${imageName}_1000.jpg 1000w, 
-                         ${imageName}_2400.jpg 2400w"
-                 sizes="(max-width: 800px) 100vw, 
-                        (max-width: 1200px) 66vw, 
-                        600px"
-                 src="${imageName}_1000.jpg" 
-                 data-zoom="${imageName}_2400.jpg"
-                 alt="Product image" 
-                 class="drift-demo-trigger"
-                 ${loading}>
-            <div class="zoom-icon">
-                <svg viewBox="0 0 24 24">
-                    <circle cx="11" cy="11" r="8"></circle>
-                    <path d="M21 21l-4.35-4.35"></path>
-                    <circle cx="11" cy="11" r="3"></circle>
-                </svg>
-            </div>
-        </div>
+        <img srcset="${imageName}_600.jpg 600w, 
+                     ${imageName}_1000.jpg 1000w, 
+                     ${imageName}_2400.jpg 2400w"
+             sizes="(max-width: 800px) 100vw, 
+                    (max-width: 1200px) 66vw, 
+                    600px"
+             src="${imageName}_1000.jpg" 
+             alt="Product image" 
+             ${loading}>
     `;
 }
 </script>
@@ -112,12 +101,6 @@ function createImageHTML(imageName, isEager = false) {
 
 <!-- Load favicon -->
 <link rel="icon" type="image/x-icon" href="/img/favicon.ico">
-
-<!-- Drift CSS -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/drift-zoom/1.3.1/drift-basic.min.css">
-
-<!-- Drift JS -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/drift-zoom/1.3.1/Drift.min.js"></script>
 
 <!-- CSS STYLES -->
 <style>
@@ -226,48 +209,6 @@ height: auto;
 aspect-ratio: 1 / 1;
 object-fit: cover;
 object-position: center;
-position: relative;
-cursor: pointer;
-}
-
-/* Drift zoom styling */
-.drift-zoom-pane {
-    border-radius: 0;
-}
-
-/* Zoom icon overlay */
-.zoom-icon {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    width: 24px;
-    height: 24px;
-    background: rgba(255, 255, 255, 0.8);
-    border-radius: 50%;
-    display: none;
-    align-items: center;
-    justify-content: center;
-    pointer-events: none;
-    z-index: 10;
-}
-
-.zoom-icon svg {
-    width: 16px;
-    height: 16px;
-    fill: #333;
-}
-
-/* Show zoom icon on hover for desktop */
-@media (hover: hover) {
-    .image-wrapper:hover .zoom-icon {
-        display: flex;
-    }
-}
-
-.image-wrapper {
-    position: relative;
-    display: inline-block;
-    width: 100%;
 }
 
  .flexright { 
@@ -457,57 +398,6 @@ document.addEventListener('DOMContentLoaded', function() {
             const isEager = index < 2; // First two images load immediately
             imageContainer.innerHTML += createImageHTML(imageName, isEager);
         }
-    });
-    
-    // Initialize Drift zoom after images are added
-    setTimeout(() => {
-        initializeDriftZoom();
-    }, 100);
-});
-
-// Initialize Drift zoom functionality
-function initializeDriftZoom() {
-    const images = document.querySelectorAll('.drift-demo-trigger');
-    
-    images.forEach(img => {
-        let driftInstance = null;
-        let isZoomed = false;
-        
-        // Preload high-res image on mouseover
-        img.addEventListener('mouseenter', function() {
-            const highResImg = new Image();
-            highResImg.src = this.getAttribute('data-zoom');
-        });
-        
-        // Toggle zoom on click
-        img.addEventListener('click', function(e) {
-            e.preventDefault();
-            
-            if (!isZoomed) {
-                // Initialize zoom
-                driftInstance = new Drift(this, {
-                    paneContainer: this.parentElement,
-                    inlinePane: true,
-                    inlineOffsetY: 0,
-                    inlineOffsetX: 0,
-                    containInline: true,
-                    hoverBoundingBox: true,
-                    touchBoundingBox: true,
-                    zoomFactor: 2,
-                    magnification: 2
-                });
-                isZoomed = true;
-                this.style.cursor = 'zoom-out';
-            } else {
-                // Destroy zoom
-                if (driftInstance) {
-                    driftInstance.destroy();
-                    driftInstance = null;
-                }
-                isZoomed = false;
-                this.style.cursor = 'pointer';
-            }
-        });
     });
 });
 </script>
