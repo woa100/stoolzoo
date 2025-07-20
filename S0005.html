@@ -42,7 +42,7 @@
 <script>
 // EDIT THESE VALUES FOR EACH PRODUCT
 const PRODUCT_TITLE = "Red Painted Stool with Single Rounded Leg";
-const PRODUCT_CODE = "S-0005";
+const PRODUCT_CODE = "S0005";
 const ORIGIN = "Unknown maker, Central Canada, 20th Century";
 const MATERIALS = "Softwood with oil paint finish";
 const DIMENSIONS = '12" x 4-3/4" x 5-1/4"';
@@ -103,8 +103,7 @@ function createImageHTML(imageName, aspectOverride = "", isEager = false) {
     const aspectClass = (aspectOverride === "ORIGINAL") ? "original-aspect" : "square-aspect";
     
     return `
-        <img srcset="${imageName}_600.jpg 600w, 
-                     ${imageName}_1000.jpg 1000w, 
+        <img srcset="${imageName}_1000.jpg 1000w,
                      ${imageName}_2400.jpg 2400w"
              sizes="(max-width: 800px) 100vw, 
                     (max-width: 1200px) 66vw, 
