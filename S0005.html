@@ -1,0 +1,528 @@
+<!-- PRODUCT VARIABLES - EDIT THESE VALUES -->
+<!-- PRODUCT_TITLE: Enter the product title here -->
+<!-- PRODUCT_CODE: Enter the product code (e.g., S-0005) -->
+<!-- ORIGIN: Enter origin information -->
+<!-- MATERIALS: Enter materials information -->
+<!-- DIMENSIONS: Enter dimensions -->
+<!-- DESCRIPTION: Enter product description -->
+<!-- SALE_STATUS: Enter A for "Inquire to Purchase", B for "Sold", or C for "Permanent Collection - Not for Sale" -->
+
+<!-- IMAGE VARIABLES - Enter image filenames WITHOUT extension (system will add _600.jpg, _1000.jpg, _2400.jpg automatically) -->
+<!-- IMAGE_01: Enter first image filename -->
+<!-- IMAGE_02: Enter second image filename -->
+<!-- IMAGE_03: Enter third image filename (leave empty to hide) -->
+<!-- IMAGE_04: Enter fourth image filename (leave empty to hide) -->
+<!-- IMAGE_05: Enter fifth image filename (leave empty to hide) -->
+<!-- IMAGE_06: Enter sixth image filename (leave empty to hide) -->
+<!-- IMAGE_07: Enter seventh image filename (leave empty to hide) -->
+<!-- IMAGE_08: Enter eighth image filename (leave empty to hide) -->
+<!-- IMAGE_09: Enter ninth image filename (leave empty to hide) -->
+<!-- IMAGE_10: Enter tenth image filename (leave empty to hide) -->
+<!-- IMAGE_11: Enter eleventh image filename (leave empty to hide) -->
+<!-- IMAGE_12: Enter twelfth image filename (leave empty to hide) -->
+<!-- IMAGE_13: Enter thirteenth image filename (leave empty to hide) -->
+<!-- IMAGE_14: Enter fourteenth image filename (leave empty to hide) -->
+
+<script>
+// EDIT THESE VALUES FOR EACH PRODUCT
+const PRODUCT_TITLE = "Red Painted Stool with Single Rounded Leg";
+const PRODUCT_CODE = "S-0005";
+const ORIGIN = "Unknown maker, Central Canada, 20th Century";
+const MATERIALS = "Softwood with oil paint finish";
+const DIMENSIONS = '12" x 4-3/4" x 5-1/4"';
+const DESCRIPTION = "A small, long stool painted with an uncertain function. Only one of the four legs has a rounded bottom, suggesting the other three legs were sawn off. The stool is sturdy and sits flat on the floor but is not quite level.";
+const SALE_STATUS = "A"; // A = Inquire to Purchase, B = Sold, C = Permanent Collection - Not for Sale
+
+// IMAGE FILENAMES (without extension - leave empty string "" to hide slot)
+const IMAGE_01 = "S0005_01";
+const IMAGE_02 = "S0005_02";
+const IMAGE_03 = "S0005_03";
+const IMAGE_04 = "S0005_04";
+const IMAGE_05 = "S0005_05";
+const IMAGE_06 = "S0005_06";
+const IMAGE_07 = "S0005_07";
+const IMAGE_08 = "S0005_08";
+const IMAGE_09 = "S0005_09";
+const IMAGE_10 = "";
+const IMAGE_11 = "";
+const IMAGE_12 = "";
+const IMAGE_13 = "";
+const IMAGE_14 = "";
+
+// Function to get sale status display
+function getSaleStatusHTML() {
+    switch(SALE_STATUS) {
+        case "A":
+            return '<a href="https://www.yahoo.com" target="_blank" class="cart-btn">Inquire to Purchase</a>';
+        case "B":
+            return '<p><strong>Sold</strong></p>';
+        case "C":
+            return '<p><strong>Permanent Collection - Not for Sale</strong></p>';
+        default:
+            return '<a href="https://www.yahoo.com" target="_blank" class="cart-btn">Inquire to Purchase</a>';
+    }
+}
+
+// Function to create image HTML with srcset and zoom functionality
+function createImageHTML(imageName, isEager = false) {
+    if (!imageName) return "";
+    
+    const loading = isEager ? "" : 'loading="lazy"';
+    return `
+        <div class="image-wrapper">
+            <img srcset="${imageName}_600.jpg 600w, 
+                         ${imageName}_1000.jpg 1000w, 
+                         ${imageName}_2400.jpg 2400w"
+                 sizes="(max-width: 800px) 100vw, 
+                        (max-width: 1200px) 66vw, 
+                        600px"
+                 src="${imageName}_1000.jpg" 
+                 data-zoom="${imageName}_2400.jpg"
+                 alt="Product image" 
+                 class="drift-demo-trigger"
+                 ${loading}>
+            <div class="zoom-icon">
+                <svg viewBox="0 0 24 24">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <path d="M21 21l-4.35-4.35"></path>
+                    <circle cx="11" cy="11" r="3"></circle>
+                </svg>
+            </div>
+        </div>
+    `;
+}
+</script>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<!-- Metadata -->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Discover a curated collection of small vintage wooden stools and primitive furniture at Maison des Tabourets | House of Stools. Shop timeless, rustic and handcrafted furniture that brings character to any space—boho, minimalist, brutalist or eclectic. Explore our atelier today."/>
+
+<!-- Twitter / X Metadata -->
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="Stool Zoo"/>
+<meta name="twitter:description" content="Discover a curated collection of vintage wooden stools, rustic tabourets and primitive seats at Stool Zoo."/>
+
+<!-- Page Title -->
+<title>Stool Zoo</title>
+
+<!-- Load favicon -->
+<link rel="icon" type="image/x-icon" href="/img/favicon.ico">
+
+<!-- Drift CSS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/drift-zoom/1.3.1/drift-basic.min.css">
+
+<!-- Drift JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/drift-zoom/1.3.1/Drift.min.js"></script>
+
+<!-- CSS STYLES -->
+<style>
+
+   /* PAGE SECTIONS */
+   /* Header */
+        header {
+            text-align: center;
+            padding-left: 65px;
+             padding-right: 65px;
+            padding-top: 20px;
+            padding-bottom: 0px;
+            position: static;
+            width: 100%;
+            top: 0;
+            box-sizing: border-box;
+        }        
+
+
+body {
+padding-top: 0px;    
+font-family: Arial, sans-serif;
+}
+
+   /* Footer */
+
+     
+   footer {
+a:hover { text-decoration: underline; }
+
+p2 { display: block;
+margin-bottom: 10px;
+}
+
+background-color: #f7f7f7;            
+text-align: left;
+       	margin-top: 10px;
+            padding-top: 40px;
+            padding-left: 40px;
+            padding-right: 40px;
+            padding-bottom: 40px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+ /* COMMON BODY SECTION CONTAINER STYLES */
+
+
+   /* Section General Layout */
+        section {
+        }
+
+
+/* Spacer */
+.spacer {
+padding-top: 45px;
+}
+
+/* Wide image container*/
+        .image-container-wide {
+            text-align: center;
+            padding-top: 10px;
+        padding-bottom: 70px;
+              padding-left: 40px;
+        padding-right: 40px;  
+max-width: 1000px;
+margin: 0 auto;
+        }
+
+
+/* Big top image*/
+        .image-container-wide img {
+            width: 100%;
+            height: auto;
+        }
+
+/* Image caption*/
+        .image-caption {
+            font-size: 13px;
+            font-family: Arial, sans-serif;
+            text-align: left;
+            margin-top: 5px;
+        }
+
+
+/* Flexbox container */
+.flexcontainer { 
+display: flex; 
+padding-top: 10px;
+       		padding-bottom: 70px;
+              	padding-left: 40px;
+        		padding-right: 40px;  
+margin: 0 auto;
+}
+
+ .flexleft { 
+display: flex;
+flex-direction: column; 
+gap: 30px; 
+flex: 2.5; 
+padding-right: 30px;
+} 
+.flexleft img { 
+width: 100%; 
+height: auto;
+aspect-ratio: 1 / 1;
+object-fit: cover;
+object-position: center;
+position: relative;
+cursor: pointer;
+}
+
+/* Drift zoom styling */
+.drift-zoom-pane {
+    border-radius: 0;
+}
+
+/* Zoom icon overlay */
+.zoom-icon {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 24px;
+    height: 24px;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 50%;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+    z-index: 10;
+}
+
+.zoom-icon svg {
+    width: 16px;
+    height: 16px;
+    fill: #333;
+}
+
+/* Show zoom icon on hover for desktop */
+@media (hover: hover) {
+    .image-wrapper:hover .zoom-icon {
+        display: flex;
+    }
+}
+
+.image-wrapper {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+}
+
+ .flexright { 
+flex: 1; 
+align-self:
+flex-start; /* Aligns text to the top */ 
+}
+ 
+/* Footer text*/
+.footer-text { 
+font-size: 13px; 
+line-height: 1.3; 
+text-align: left;
+}
+
+a { 
+text-decoration: none; 
+color: inherit;
+}
+
+h1 {
+    font-size: 50px;
+    font-weight: bold;
+margin-top: 5px;
+margin-bottom: 10px;
+}
+
+h2 {
+    font-size: 20px;
+    font-weight: bold;
+margin-top: 5px;
+margin-bottom: 5px;
+}
+
+p{
+    font-size: 13px;
+    margin-top: 4px;
+    margin-bottom: 4px;
+}
+
+p2{
+    font-size: 13px;
+}
+
+.p-loose {
+  margin-bottom: 20px;
+}
+
+.cart-btn {
+    display: inline-block;
+    padding: 5px 10px; /* Increased padding for better size */
+    font-size: 11px; /* Slightly larger font for better readability */
+    font-weight: bold; /* Emphasizing the button text */
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    border: 1px solid;
+    border-radius: 8px; /* Rounded corners */
+    background-color: #f7f7f7; /* White background */
+    transition: all 0.3s ease; /* Smooth transition for hover and active states */
+}
+
+.cart-btn:hover {
+    background-color: #f7f7f7; /* Green background on hover */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Deeper shadow on hover */
+    transform: translateY(-2px); /* Lift effect when hovered */
+}
+
+.cart-btn:active {
+    transform: translateY(2px); /* Button presses down on click */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Shadow lightens on click */
+}
+
+/* Hide empty image slots */
+.flexleft img[src=""] {
+    display: none;
+}
+
+  /* MOBILE CSS STYLES */
+
+ @media screen and (max-width: 800px) {
+
+.p-loose {
+  margin-bottom: 10px;
+}
+
+   footer {
+
+       	margin-top: 0px;
+            padding-top: 20px;
+            padding-left: 10px;
+            padding-right: 10px;
+            padding-bottom: 20px;
+        }
+
+/* Spacer */
+.spacer {
+padding-top: 20px;
+}
+
+/* Wide image container*/
+        .image-container-wide {
+              padding-left: 10px;
+        padding-right: 10px;  
+        padding-bottom: 30px;
+        }
+
+.flexcontainer { 
+flex-direction: column;
+              padding-left: 10px;
+        padding-right: 10px;  
+        padding-bottom: 30px;
+}
+
+  .flexleft {
+padding-right: 0px;
+    }
+
+  .flexright {
+        order: -1; /* Moves the right column to the top */
+margin-bottom: 30px;
+    }
+
+
+h1 {
+    font-size: 30px;
+    font-weight: bold;
+margin-top: 5px;
+margin-bottom: 10px;
+}
+
+}
+
+</style>
+</head>
+
+<!-- BODY -->
+
+
+<header>
+    <h1>STOOL ZOO
+</h1>
+
+</header>
+
+<body>
+
+       <section class="spacer">
+    </section>
+
+<div class="flexcontainer"> 
+
+<div class="flexleft" id="imageContainer">
+<!-- Images will be populated by JavaScript -->
+</div> 
+
+<div class="flexright"> 
+<h2 id="productTitle"></h2> 
+<p class="p-loose"><strong id="productCode"></strong></p>
+<p><b>Origin: </b><span id="origin"></span></p> 
+<p><b>Materials: </b><span id="materials"></span></p>
+<p class="p-loose"><b>Dimensions: </b><span id="dimensions"></span></p>
+<p id="description"></p>
+<br>
+<div id="saleStatus"></div>
+</div> 
+</div>
+
+<script>
+// Populate content when page loads
+document.addEventListener('DOMContentLoaded', function() {
+    // Set text content
+    document.getElementById('productTitle').textContent = PRODUCT_TITLE;
+    document.getElementById('productCode').textContent = PRODUCT_CODE;
+    document.getElementById('origin').textContent = ORIGIN;
+    document.getElementById('materials').textContent = MATERIALS;
+    document.getElementById('dimensions').innerHTML = DIMENSIONS;
+    document.getElementById('description').textContent = DESCRIPTION;
+    document.getElementById('saleStatus').innerHTML = getSaleStatusHTML();
+    
+    // Create image elements
+    const imageContainer = document.getElementById('imageContainer');
+    const imageNames = [IMAGE_01, IMAGE_02, IMAGE_03, IMAGE_04, IMAGE_05, IMAGE_06, IMAGE_07, IMAGE_08, IMAGE_09, IMAGE_10, IMAGE_11, IMAGE_12, IMAGE_13, IMAGE_14];
+    
+    imageNames.forEach((imageName, index) => {
+        if (imageName) {
+            const isEager = index < 2; // First two images load immediately
+            imageContainer.innerHTML += createImageHTML(imageName, isEager);
+        }
+    });
+    
+    // Initialize Drift zoom after images are added
+    setTimeout(() => {
+        initializeDriftZoom();
+    }, 100);
+});
+
+// Initialize Drift zoom functionality
+function initializeDriftZoom() {
+    const images = document.querySelectorAll('.drift-demo-trigger');
+    
+    images.forEach(img => {
+        let driftInstance = null;
+        let isZoomed = false;
+        
+        // Preload high-res image on mouseover
+        img.addEventListener('mouseenter', function() {
+            const highResImg = new Image();
+            highResImg.src = this.getAttribute('data-zoom');
+        });
+        
+        // Toggle zoom on click
+        img.addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            if (!isZoomed) {
+                // Initialize zoom
+                driftInstance = new Drift(this, {
+                    paneContainer: this.parentElement,
+                    inlinePane: true,
+                    inlineOffsetY: 0,
+                    inlineOffsetX: 0,
+                    containInline: true,
+                    hoverBoundingBox: true,
+                    touchBoundingBox: true,
+                    zoomFactor: 2,
+                    magnification: 2
+                });
+                isZoomed = true;
+                this.style.cursor = 'zoom-out';
+            } else {
+                // Destroy zoom
+                if (driftInstance) {
+                    driftInstance.destroy();
+                    driftInstance = null;
+                }
+                isZoomed = false;
+                this.style.cursor = 'pointer';
+            }
+        });
+    });
+});
+</script>
+
+</body>
+
+<footer>
+<div class="footer-text">
+<nav> 
+<p><a href="https://www.yahoo.com" target="_blank">Stool Safari</a></p>
+<p><a href="https://www.google.com" target="_blank">About</a></p>
+<p><a href="https://www.microsoft.com" target="_blank">Terms and Conditions</a></p>
+<p><a href="https://www.cooking.com" target="_blank">Shipping and pickup</a></p> 
+</nav>
+</div>
+</footer>
+
+</html>
