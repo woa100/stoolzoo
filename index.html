@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Discover a curated collection of small vintage wooden stools and primitive furniture at Stool Zoo. Shop timeless, rustic and handcrafted furniture that brings character to any space—boho, minimalist, brutalist or eclectic. Explore our collection today." />
+  
+  <title>Stool Zoo</title>
+  <link rel="icon" type="image/x-icon" href="/img/favicon.ico" />
+  <link rel="stylesheet" href="styles.css" />
+
+  <!-- Twitter Metadata -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Stool Zoo" />
+  <meta name="twitter:description" content="Discover a curated collection of vintage wooden stools, rustic tabourets and primitive seats at Stool Zoo." />
+</head>
+
+<body>
+  <header>
+    <h1>STOOL ZOO</h1>
+  </header>
+
+  <section class="spacer"></section>
+
+  <script>
+    // ✏️ EDIT STOOL INFO BELOW - ENTER VALUES FOR EACH SLOT (LEAVE NAME EMPTY TO HIDE SLOT)
+    
+    // SLOT 1
+    const STOOL_01_NAME = "Blue Chippy Stool";
+    const STOOL_01_ID = "S0005";
+    const STOOL_01_DIMENSIONS = '5" x 10" x 10"';
+    
+    // SLOT 2  
+    const STOOL_02_NAME = "Red Painted Stool with Single Rounded Leg";
+    const STOOL_02_ID = "S0005";
+    const STOOL_02_DIMENSIONS = '12" x 4-3/4" x 5-1/4"';
+    
+    // SLOT 3
+    const STOOL_03_NAME = "Vintage Wood Stool";
+    const STOOL_03_ID = "S0005";
+    const STOOL_03_DIMENSIONS = '8" x 12" x 14"';
+    
+    // SLOT 4
+    const STOOL_04_NAME = "";
+    const STOOL_04_ID = "";
+    const STOOL_04_DIMENSIONS = "";
+    
+    // SLOT 5
+    const STOOL_05_NAME = "";
+    const STOOL_05_ID = "";
+    const STOOL_05_DIMENSIONS = "";
+    
+    // SLOT 6
+    const STOOL_06_NAME = "";
+    const STOOL_06_ID = "";
+    const STOOL_06_DIMENSIONS = "";
+    
+    // SLOT 7
+    const STOOL_07_NAME = "";
+    const STOOL_07_ID = "";
+    const STOOL_07_DIMENSIONS = "";
+    
+    // SLOT 8
+    const STOOL_08_NAME = "";
+    const STOOL_08_ID = "";
+    const STOOL_08_DIMENSIONS = "";
+
+    // Compile stool data array from individual variables
+    const stoolData = [
+      { name: STOOL_01_NAME, id: STOOL_01_ID, dimensions: STOOL_01_DIMENSIONS },
+      { name: STOOL_02_NAME, id: STOOL_02_ID, dimensions: STOOL_02_DIMENSIONS },
+      { name: STOOL_03_NAME, id: STOOL_03_ID, dimensions: STOOL_03_DIMENSIONS },
+      { name: STOOL_04_NAME, id: STOOL_04_ID, dimensions: STOOL_04_DIMENSIONS },
+      { name: STOOL_05_NAME, id: STOOL_05_ID, dimensions: STOOL_05_DIMENSIONS },
+      { name: STOOL_06_NAME, id: STOOL_06_ID, dimensions: STOOL_06_DIMENSIONS },
+      { name: STOOL_07_NAME, id: STOOL_07_ID, dimensions: STOOL_07_DIMENSIONS },
+      { name: STOOL_08_NAME, id: STOOL_08_ID, dimensions: STOOL_08_DIMENSIONS }
+    ].filter(stool => stool.name); // Only include stools with names
+
+    // Function to create responsive image HTML with srcset and lazy loading
+    function createStoolImageHTML(cleanId, stoolName, isEager = false) {
+      const loading = isEager ? "" : 'loading="lazy"';
+      
+      return `
+        <img srcset="https://prairieacoustics.neocities.org/${cleanId}_01_1000.jpg 1000w, 
+                     https://prairieacoustics.neocities.org/${cleanId}_01_2400.jpg 2400w"
+             sizes="(max-width: 600px) 100vw, 
+                    (max-width: 1200px) 50vw, 
+                    400px"
+             src="https://prairieacoustics.neocities.org/${cleanId}_01_2400.jpg" 
+             alt="${stoolName}"
+             ${loading}>
+      `;
+    }
+  </script>
+
+  <main>
+    <section class="product-showcase">
+      <div class="homepage-container">
+        <div class="product-grid" role="list">
+          <!-- Product items will be generated dynamically -->
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const grid = document.querySelector('.product-grid');
+
+      stoolData.forEach((stool, index) => {
+        const cleanId = stool.id.replace('-', '');
+        const hoverImg1000 = `https://prairieacoustics.neocities.org/${cleanId}_02_1000.jpg`;
+        const hoverImg2400 = `https://prairieacoustics.neocities.org/${cleanId}_02_2400.jpg`;
+
+        // Create product item HTML with better semantic structure
+        const item = document.createElement('article');
+        item.className = 'product-item';
+        item.setAttribute('role', 'listitem');
+
+        // Use lazy loading for all images except the first one
+        const isEager = index === 0;
+
+        item.innerHTML = `
+          <div class="product-image-wrapper" onclick="window.location.href='${stool.id}.html'" role="button" tabindex="0" aria-label="View ${stool.name} details">
+            <div id="stoolImgContainer${index}">
+              ${createStoolImageHTML(cleanId, stool.name, isEager)}
+            </div>
+          </div>
+          <div class="product-caption">
+            <h3><a href="${stool.id}.html" style="text-decoration: none;" onmouseover="this.style.textDecoration='underline'" onmouseout="this.style.textDecoration='none'">${stool.name}</a></h3>
+            <p><b>${stool.id}</b></p>
+            <p class="product-dimensions">${stool.dimensions}</p>
+          </div>
+        `;
+
+        // Append to grid
+        grid.appendChild(item);
+
+        // Add hover effect with responsive images
+        const imgContainer = item.querySelector(`#stoolImgContainer${index}`);
+        const img = imgContainer.querySelector('img');
+        
+        // Preload hover image
+        const hoverImgPreload = new Image();
+        hoverImgPreload.src = hoverImg1000;
+
+        // Mouse events
+        imgContainer.addEventListener('mouseover', () => {
+          img.srcset = `${hoverImg1000} 1000w, ${hoverImg2400} 2400w`;
+          img.src = hoverImg2400;
+        });
+        
+        imgContainer.addEventListener('mouseout', () => {
+          img.srcset = `https://prairieacoustics.neocities.org/${cleanId}_01_1000.jpg 1000w, https://prairieacoustics.neocities.org/${cleanId}_01_2400.jpg 2400w`;
+          img.src = `https://prairieacoustics.neocities.org/${cleanId}_01_2400.jpg`;
+        });
+
+        // Keyboard accessibility
+        imgContainer.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            window.location.href = `${stool.id}.html`;
+          }
+        });
+      });
+    });
+  </script>
+
+  <footer>
+    <div class="footer-text">
+      <nav>
+        <p><a href="https://www.yahoo.com" target="_blank">Stool Safari</a></p>
+        <p><a href="https://www.google.com" target="_blank">About</a></p>
+        <p><a href="https://www.microsoft.com" target="_blank">Terms and Conditions</a></p>
+        <p><a href="https://www.cooking.com" target="_blank">Shipping and Pickup</a></p>
+      </nav>
+    </div>
+  </footer>
+</body>
+</html>
