@@ -82,12 +82,12 @@
       const loading = isEager ? "" : 'loading="lazy"';
       
       return `
-        <img srcset="https://prairieacoustics.neocities.org/${cleanId}_01_1000.webp 1000w, 
-                     https://prairieacoustics.neocities.org/${cleanId}_01_2400.webp 2400w"
+        <img srcset="${cleanId}_01_1000.webp 1000w, 
+                    ${cleanId}_01_2400.webp 2400w"
              sizes="(max-width: 600px) 100vw, 
                     (max-width: 1200px) 50vw, 
                     400px"
-             src="https://prairieacoustics.neocities.org/${cleanId}_01_2400.webp" 
+             src="/${cleanId}_01_2400.webp" 
              alt="${stoolName}"
              ${loading}>
       `;
@@ -110,8 +110,8 @@
 
       stoolData.forEach((stool, index) => {
         const cleanId = stool.id.replace('-', '');
-        const hoverImg1000 = `https://prairieacoustics.neocities.org/${cleanId}_02_1000.webp`;
-        const hoverImg2400 = `https://prairieacoustics.neocities.org/${cleanId}_02_2400.webp`;
+        const hoverImg1000 = `${cleanId}_02_1000.webp`;
+        const hoverImg2400 = `${cleanId}_02_2400.webp`;
 
         // Create product item HTML with better semantic structure
         const item = document.createElement('article');
@@ -152,8 +152,8 @@
         });
         
         imgContainer.addEventListener('mouseout', () => {
-          img.srcset = `https://prairieacoustics.neocities.org/${cleanId}_01_1000.webp 1000w, https://prairieacoustics.neocities.org/${cleanId}_01_2400.jpg 2400w`;
-          img.src = `https://prairieacoustics.neocities.org/${cleanId}_01_2400.webp`;
+          img.srcset = `${cleanId}_01_1000.webp 1000w, https://prairieacoustics.neocities.org/${cleanId}_01_2400.jpg 2400w`;
+          img.src = `${cleanId}_01_2400.webp`;
         });
 
         // Keyboard accessibility
