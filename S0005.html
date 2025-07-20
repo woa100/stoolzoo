@@ -23,6 +23,22 @@
 <!-- IMAGE_13: Enter thirteenth image filename (leave empty to hide) -->
 <!-- IMAGE_14: Enter fourteenth image filename (leave empty to hide) -->
 
+<!-- ASPECT RATIO OVERRIDES - Enter "ORIGINAL" to preserve original aspect ratio, leave empty for square crop -->
+<!-- ASPECT_01: Enter "ORIGINAL" or leave empty -->
+<!-- ASPECT_02: Enter "ORIGINAL" or leave empty -->
+<!-- ASPECT_03: Enter "ORIGINAL" or leave empty -->
+<!-- ASPECT_04: Enter "ORIGINAL" or leave empty -->
+<!-- ASPECT_05: Enter "ORIGINAL" or leave empty -->
+<!-- ASPECT_06: Enter "ORIGINAL" or leave empty -->
+<!-- ASPECT_07: Enter "ORIGINAL" or leave empty -->
+<!-- ASPECT_08: Enter "ORIGINAL" or leave empty -->
+<!-- ASPECT_09: Enter "ORIGINAL" or leave empty -->
+<!-- ASPECT_10: Enter "ORIGINAL" or leave empty -->
+<!-- ASPECT_11: Enter "ORIGINAL" or leave empty -->
+<!-- ASPECT_12: Enter "ORIGINAL" or leave empty -->
+<!-- ASPECT_13: Enter "ORIGINAL" or leave empty -->
+<!-- ASPECT_14: Enter "ORIGINAL" or leave empty -->
+
 <script>
 // EDIT THESE VALUES FOR EACH PRODUCT
 const PRODUCT_TITLE = "Red Painted Stool with Single Rounded Leg";
@@ -31,7 +47,7 @@ const ORIGIN = "Unknown maker, Central Canada, 20th Century";
 const MATERIALS = "Softwood with oil paint finish";
 const DIMENSIONS = '12" x 4-3/4" x 5-1/4"';
 const DESCRIPTION = "A small, long stool painted with an uncertain function. Only one of the four legs has a rounded bottom, suggesting the other three legs were sawn off. The stool is sturdy and sits flat on the floor but is not quite level.";
-const SALE_STATUS = "A"; // A = Inquire to Purchase, B = Sold, C = Permanent Collection - Not for Sale
+const SALE_STATUS = "B"; // A = Inquire to Purchase, B = Sold, C = Permanent Collection - Not for Sale
 
 // IMAGE FILENAMES (without extension - leave empty string "" to hide slot)
 const IMAGE_01 = "S0005_01";
@@ -49,6 +65,22 @@ const IMAGE_12 = "";
 const IMAGE_13 = "";
 const IMAGE_14 = "";
 
+// ASPECT RATIO OVERRIDES (Enter "ORIGINAL" to preserve original aspect ratio, leave empty for square crop)
+const ASPECT_01 = "ORIGINAL";
+const ASPECT_02 = "ORIGINAL";
+const ASPECT_03 = "";
+const ASPECT_04 = "";
+const ASPECT_05 = "";
+const ASPECT_06 = "";
+const ASPECT_07 = "";
+const ASPECT_08 = "";
+const ASPECT_09 = "";
+const ASPECT_10 = "";
+const ASPECT_11 = "";
+const ASPECT_12 = "";
+const ASPECT_13 = "";
+const ASPECT_14 = "";
+
 // Function to get sale status display
 function getSaleStatusHTML() {
     switch(SALE_STATUS) {
@@ -63,11 +95,13 @@ function getSaleStatusHTML() {
     }
 }
 
-// Function to create image HTML with srcset
-function createImageHTML(imageName, isEager = false) {
+// Function to create image HTML with srcset and aspect ratio control
+function createImageHTML(imageName, aspectOverride = "", isEager = false) {
     if (!imageName) return "";
     
     const loading = isEager ? "" : 'loading="lazy"';
+    const aspectClass = (aspectOverride === "ORIGINAL") ? "original-aspect" : "square-aspect";
+    
     return `
         <img srcset="${imageName}_600.jpg 600w, 
                      ${imageName}_1000.jpg 1000w, 
@@ -76,7 +110,8 @@ function createImageHTML(imageName, isEager = false) {
                     (max-width: 1200px) 66vw, 
                     600px"
              src="${imageName}_1000.jpg" 
-             alt="Product image" 
+             alt="Product image"
+             class="${aspectClass}"
              ${loading}>
     `;
 }
@@ -203,12 +238,20 @@ gap: 30px;
 flex: 2.5; 
 padding-right: 30px;
 } 
-.flexleft img { 
+
+/* Square aspect ratio images (default behavior) */
+.flexleft img.square-aspect { 
 width: 100%; 
 height: auto;
 aspect-ratio: 1 / 1;
 object-fit: cover;
 object-position: center;
+}
+
+/* Original aspect ratio images (override) */
+.flexleft img.original-aspect { 
+width: 100%; 
+height: auto;
 }
 
  .flexright { 
@@ -392,11 +435,13 @@ document.addEventListener('DOMContentLoaded', function() {
     // Create image elements
     const imageContainer = document.getElementById('imageContainer');
     const imageNames = [IMAGE_01, IMAGE_02, IMAGE_03, IMAGE_04, IMAGE_05, IMAGE_06, IMAGE_07, IMAGE_08, IMAGE_09, IMAGE_10, IMAGE_11, IMAGE_12, IMAGE_13, IMAGE_14];
+    const aspectOverrides = [ASPECT_01, ASPECT_02, ASPECT_03, ASPECT_04, ASPECT_05, ASPECT_06, ASPECT_07, ASPECT_08, ASPECT_09, ASPECT_10, ASPECT_11, ASPECT_12, ASPECT_13, ASPECT_14];
     
     imageNames.forEach((imageName, index) => {
         if (imageName) {
             const isEager = index < 2; // First two images load immediately
-            imageContainer.innerHTML += createImageHTML(imageName, isEager);
+            const aspectOverride = aspectOverrides[index];
+            imageContainer.innerHTML += createImageHTML(imageName, aspectOverride, isEager);
         }
     });
 });
