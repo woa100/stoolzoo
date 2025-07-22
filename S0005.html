@@ -39,6 +39,34 @@
 <!-- ASPECT_13: Enter "ORIGINAL" or leave empty -->
 <!-- ASPECT_14: Enter "ORIGINAL" or leave empty -->
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<!-- Metadata -->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Discover a curated collection of small vintage wooden stools and primitive furniture at Maison des Tabourets | House of Stools. Shop timeless, rustic and handcrafted furniture that brings character to any space—boho, minimalist, brutalist or eclectic. Explore our atelier today."/>
+
+<!-- Twitter / X Metadata -->
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="Stool Zoo"/>
+<meta name="twitter:description" content="Discover a curated collection of vintage wooden stools, rustic tabourets and primitive seats at Stool Zoo."/>
+
+<!-- Page Title -->
+<title>Stool Zoo</title>
+
+<!-- Load favicon -->
+<link rel="icon" type="image/x-icon" href="/img/favicon.ico">
+
+<!-- Load external CSS -->
+<link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+<!-- Header will be loaded here -->
+<div id="header-placeholder"></div>
+
 <script>
 // EDIT THESE VALUES FOR EACH PRODUCT
 const PRODUCT_TITLE = "Red Painted Stool with Single Rounded Leg";
@@ -114,45 +142,32 @@ function createImageHTML(imageName, aspectOverride = "", isEager = false) {
              ${loading}>
     `;
 }
+
+// Function to load header and footer
+async function loadHeaderFooter() {
+  try {
+    const response = await fetch('header-footer.html');
+    const content = await response.text();
+    
+    // Split content by a unique delimiter to separate header and footer
+    const parts = content.split('<!-- FOOTER TEMPLATE -->');
+    const headerContent = parts[0].replace('<!-- HEADER TEMPLATE -->', '');
+    const footerContent = '<!-- FOOTER TEMPLATE -->' + parts[1];
+    
+    // Insert header
+    document.getElementById('header-placeholder').innerHTML = headerContent;
+    
+    // Insert footer at the end of body
+    const footerDiv = document.createElement('div');
+    footerDiv.id = 'footer-placeholder';
+    footerDiv.innerHTML = footerContent.replace('<!-- FOOTER TEMPLATE -->', '');
+    document.body.appendChild(footerDiv);
+    
+  } catch (error) {
+    console.error('Error loading header/footer:', error);
+  }
+}
 </script>
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-
-<!-- Metadata -->
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Discover a curated collection of small vintage wooden stools and primitive furniture at Maison des Tabourets | House of Stools. Shop timeless, rustic and handcrafted furniture that brings character to any space—boho, minimalist, brutalist or eclectic. Explore our atelier today."/>
-
-<!-- Twitter / X Metadata -->
-<meta name="twitter:card" content="summary_large_image"/>
-<meta name="twitter:title" content="Stool Zoo"/>
-<meta name="twitter:description" content="Discover a curated collection of vintage wooden stools, rustic tabourets and primitive seats at Stool Zoo."/>
-
-<!-- Page Title -->
-<title>Stool Zoo</title>
-
-<!-- Load favicon -->
-<link rel="icon" type="image/x-icon" href="/img/favicon.ico">
-
-<!-- Load external CSS -->
-<link rel="stylesheet" href="styles.css">
-</head>
-
-<!-- BODY -->
-
-
-<header>
-    <h1>STOOL ZOO
-</h1>
-
-</header>
-
-<body>
-
-       <section class="spacer">
-    </section>
 
 <div class="flexcontainer"> 
 
@@ -174,7 +189,10 @@ function createImageHTML(imageName, aspectOverride = "", isEager = false) {
 
 <script>
 // Populate content when page loads
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', async function() {
+    // Load header and footer first
+    await loadHeaderFooter();
+    
     // Set text content
     document.getElementById('productTitle').textContent = PRODUCT_TITLE;
     document.getElementById('productCode').textContent = PRODUCT_CODE;
@@ -199,17 +217,7 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 </script>
 
+<!-- Footer will be loaded here by JavaScript -->
 </body>
-
-<footer>
-<div class="footer-text">
-<nav> 
-<p><a href="https://www.yahoo.com" target="_blank">Stool Safari</a></p>
-<p><a href="https://www.google.com" target="_blank">About</a></p>
-<p><a href="https://www.microsoft.com" target="_blank">Terms and Conditions</a></p>
-<p><a href="https://www.cooking.com" target="_blank">Shipping and pickup</a></p> 
-</nav>
-</div>
-</footer>
 
 </html>
