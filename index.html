@@ -16,11 +16,8 @@
 </head>
 
 <body>
-  <header>
-    <h1>STOOL ZOO</h1>
-  </header>
-
-  <section class="spacer"></section>
+  <!-- Header will be loaded here -->
+  <div id="header-placeholder"></div>
 
   <script>
     // ✏️ EDIT STOOL INFO BELOW - ENTER VALUES FOR EACH SLOT (LEAVE NAME EMPTY TO HIDE SLOT)
@@ -78,21 +75,45 @@
     ].filter(stool => stool.name); // Only include stools with names
 
     // Function to create responsive image HTML with srcset and lazy loading
-function createStoolImageHTML(cleanId, stoolName, isEager = false) {
-  const loading = isEager ? "" : 'loading="lazy"';
-  
-  return `
-    <img srcset="${cleanId}_01_1000.webp 1000w, 
-                ${cleanId}_01_2400.webp 2400w"
-         sizes="(max-width: 600px) 100vw, 
-                (max-width: 1200px) 50vw, 
-                800px"
-         src="/${cleanId}_01_2400.webp" 
-         alt="${stoolName}"
-         ${loading}>
-  `;
-}
+    function createStoolImageHTML(cleanId, stoolName, isEager = false) {
+      const loading = isEager ? "" : 'loading="lazy"';
+      
+      return `
+        <img srcset="${cleanId}_01_1000.webp 1000w, 
+                    ${cleanId}_01_2400.webp 2400w"
+             sizes="(max-width: 600px) 100vw, 
+                    (max-width: 1200px) 50vw, 
+                    800px"
+             src="/${cleanId}_01_2400.webp" 
+             alt="${stoolName}"
+             ${loading}>
+      `;
+    }
 
+    // Function to load header and footer
+    async function loadHeaderFooter() {
+      try {
+        const response = await fetch('header-footer.html');
+        const content = await response.text();
+        
+        // Split content by a unique delimiter to separate header and footer
+        const parts = content.split('<!-- FOOTER TEMPLATE -->');
+        const headerContent = parts[0].replace('<!-- HEADER TEMPLATE -->', '');
+        const footerContent = '<!-- FOOTER TEMPLATE -->' + parts[1];
+        
+        // Insert header
+        document.getElementById('header-placeholder').innerHTML = headerContent;
+        
+        // Insert footer at the end of body
+        const footerDiv = document.createElement('div');
+        footerDiv.id = 'footer-placeholder';
+        footerDiv.innerHTML = footerContent.replace('<!-- FOOTER TEMPLATE -->', '');
+        document.body.appendChild(footerDiv);
+        
+      } catch (error) {
+        console.error('Error loading header/footer:', error);
+      }
+    }
   </script>
 
   <main>
@@ -106,7 +127,11 @@ function createStoolImageHTML(cleanId, stoolName, isEager = false) {
   </main>
 
   <script>
-    document.addEventListener('DOMContentLoaded', () => {
+    document.addEventListener('DOMContentLoaded', async () => {
+      // Load header and footer first
+      await loadHeaderFooter();
+      
+      // Then generate product grid
       const grid = document.querySelector('.product-grid');
 
       stoolData.forEach((stool, index) => {
@@ -153,7 +178,7 @@ function createStoolImageHTML(cleanId, stoolName, isEager = false) {
         });
         
         imgContainer.addEventListener('mouseout', () => {
-          img.srcset = `${cleanId}_01_1000.webp 1000w, ${cleanId}_01_2400.jpg 2400w`;
+          img.srcset = `${cleanId}_01_1000.webp 1000w, ${cleanId}_01_2400.webp 2400w`;
           img.src = `${cleanId}_01_2400.webp`;
         });
 
@@ -168,15 +193,6 @@ function createStoolImageHTML(cleanId, stoolName, isEager = false) {
     });
   </script>
 
-  <footer>
-    <div class="footer-text">
-      <nav>
-        <p><a href="https://www.yahoo.com" target="_blank">Stool Safari</a></p>
-        <p><a href="https://www.google.com" target="_blank">About</a></p>
-        <p><a href="https://www.microsoft.com" target="_blank">Terms and Conditions</a></p>
-        <p><a href="https://www.cooking.com" target="_blank">Shipping and Pickup</a></p>
-      </nav>
-    </div>
-  </footer>
+  <!-- Footer will be loaded here by JavaScript -->
 </body>
 </html>
