@@ -1,6 +1,6 @@
 <!-- HEADER TEMPLATE -->
 <header>
-  <h1>STOOL ZOO</h1>
+  <h1><a href="index.html" class="title-link">STOOL ZOO</a></h1>
 </header>
 
 <section class="spacer"></section>
@@ -16,3 +16,21 @@
     </nav>
   </div>
 </footer>
+
+<style>
+/* Title link specific styles to prevent hover/click effects */
+.title-link {
+    color: inherit !important;
+    text-decoration: none !important;
+    cursor: default;
+}
+
+.title-link:hover,
+.title-link:active,
+.title-link:focus {
+    color: inherit !important;
+    text-decoration: none !important;
+    background-color: transparent !important;
+    outline: none;
+}
+</style>
