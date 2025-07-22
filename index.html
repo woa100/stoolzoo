@@ -153,7 +153,7 @@ function createStoolImageHTML(cleanId, stoolName, isEager = false) {
         });
         
         imgContainer.addEventListener('mouseout', () => {
-          img.srcset = `${cleanId}_01_1000.webp 1000w, https://prairieacoustics.neocities.org/${cleanId}_01_2400.jpg 2400w`;
+          img.srcset = `${cleanId}_01_1000.webp 1000w, ${cleanId}_01_2400.jpg 2400w`;
           img.src = `${cleanId}_01_2400.webp`;
         });
 
