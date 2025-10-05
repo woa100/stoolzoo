@@ -90,7 +90,7 @@ section {
 .flexleft {
     display: flex;
     flex-direction: column;
-    gap: 30px;
+    gap: 50px;
     flex: 2.5;
     padding-right: 30px;
 }
