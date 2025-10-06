@@ -79,14 +79,14 @@
       const loading = isEager ? "" : 'loading="lazy"';
       
       return `
-        <img srcset="${cleanId}_01_1000.webp 1000w, 
-                    ${cleanId}_01_2400.webp 2400w"
-             sizes="(max-width: 600px) 100vw, 
+        <img srcset="/assets/${cleanId}_01_1000.webp 1000w, 
+                    /assets/${cleanId}_01_2400.webp 2400w"
+            sizes="(max-width: 600px) 100vw, 
                     (max-width: 1200px) 50vw, 
                     800px"
-             src="/${cleanId}_01_2400.webp" 
-             alt="${stoolName}"
-             ${loading}>
+            src="/assets/${cleanId}_01_2400.webp" 
+            alt="${stoolName}"
+            ${loading}>
       `;
     }
 
@@ -135,9 +135,9 @@
       const grid = document.querySelector('.product-grid');
 
       stoolData.forEach((stool, index) => {
-        const cleanId = stool.id.replace('-', '');
-        const hoverImg1000 = `${cleanId}_02_1000.webp`;
-        const hoverImg2400 = `${cleanId}_02_2400.webp`;
+      const cleanId = stool.id.replace('-', '');
+      const hoverImg1000 = `/assets/${cleanId}_02_1000.webp`;
+      const hoverImg2400 = `/assets/${cleanId}_02_2400.webp`;
 
         // Create product item HTML with better semantic structure
         const item = document.createElement('article');
@@ -178,8 +178,8 @@
         });
         
         imgContainer.addEventListener('mouseout', () => {
-          img.srcset = `${cleanId}_01_1000.webp 1000w, ${cleanId}_01_2400.webp 2400w`;
-          img.src = `${cleanId}_01_2400.webp`;
+          img.srcset = `/assets/${cleanId}_01_1000.webp 1000w, /assets/${cleanId}_01_2400.webp 2400w`;
+          img.src = `/assets/${cleanId}_01_2400.webp`;
         });
 
         // Keyboard accessibility
