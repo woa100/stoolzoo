@@ -107,12 +107,12 @@ function createImageHTML(imageName, aspectOverride = "", isEager = false) {
     const aspectClass = (aspectOverride === "ORIGINAL") ? "original-aspect" : "square-aspect";
     
     return `
-        <img srcset="${imageName}_1000.webp 1000w,
-                     ${imageName}_2400.webp 2400w"
+        <img srcset="/assets/${imageName}_1000.webp 1000w,
+                     /assets/${imageName}_2400.webp 2400w"
              sizes="(max-width: 800px) 100vw, 
                     (max-width: 1200px) 66vw, 
                     600px"
-             src="${imageName}_1000.webp" 
+             src="/assets/${imageName}_1000.webp" 
              alt="Product image"
              class="${aspectClass}"
              ${loading}>
