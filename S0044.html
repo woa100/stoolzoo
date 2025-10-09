@@ -1,0 +1,199 @@
+<!-- PRODUCT VARIABLES - EDIT THESE VALUES -->
+<!-- PRODUCT_TITLE: Enter the product title here -->
+<!-- PRODUCT_CODE: Enter the product code (e.g., S-0005) -->
+<!-- ORIGIN: Enter origin information -->
+<!-- MATERIALS: Enter materials information -->
+<!-- DIMENSIONS: Enter dimensions -->
+<!-- DESCRIPTION: Enter product description -->
+<!-- SALE_STATUS: Enter A for "Inquire to Purchase", B for "Sold", or C for "Permanent Collection - Not for Sale" -->
+
+<!-- IMAGE VARIABLES - Enter image filenames WITHOUT extension (system will add _600.jpg, _1000.jpg, _2400.jpg automatically) -->
+
+<!-- ASPECT RATIO OVERRIDES - Enter "ORIGINAL" to preserve original aspect ratio, leave empty for square crop -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<!-- Metadata -->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Discover a curated collection of small vintage wooden stools and primitive furniture at Maison des Tabourets | House of Stools. Shop timeless, rustic and handcrafted furniture that brings character to any space—boho, minimalist, brutalist or eclectic. Explore our atelier today."/>
+
+<!-- Twitter / X Metadata -->
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="Stool Zoo"/>
+<meta name="twitter:description" content="Discover a curated collection of vintage wooden stools, rustic tabourets and primitive seats at Stool Zoo."/>
+
+<!-- Page Title -->
+<title>Stool Zoo</title>
+
+<!-- Load favicon -->
+<link rel="icon" type="image/x-icon" href="/img/favicon.ico">
+
+<!-- Load external CSS -->
+<link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+<!-- Header will be loaded here -->
+<div id="header-placeholder"></div>
+
+<script>
+// EDIT THESE VALUES FOR EACH PRODUCT
+const PRODUCT_TITLE = "Small White-Painted Stepstool";
+const PRODUCT_CODE = "S0044";
+const ORIGIN = "Unknown maker, Central Canada, 20th Century";
+const MATERIALS = "Plywood with oil paint finish";
+const DIMENSIONS = '10-1/2" x 6-1/4" x 5-1/4"';
+const DESCRIPTION = "";
+const SALE_STATUS = "A"; // A = Inquire to Purchase, B = Sold, C = Permanent Collection - Not for Sale
+
+// IMAGE FILENAMES (without extension - leave empty string "" to hide slot)
+const IMAGE_01 = "S0044_01";
+const IMAGE_02 = "S0044_02";
+const IMAGE_03 = "S0044_03";
+const IMAGE_04 = "S0044_04";
+const IMAGE_05 = "S0044_05";
+const IMAGE_06 = "S0044_06";
+const IMAGE_07 = "S0044_07";
+const IMAGE_08 = "";
+const IMAGE_09 = "";
+const IMAGE_10 = "";
+const IMAGE_11 = "";
+const IMAGE_12 = "";
+const IMAGE_13 = "";
+const IMAGE_14 = "";
+
+// ASPECT RATIO OVERRIDES (Enter "ORIGINAL" to preserve original aspect ratio, leave empty for square crop)
+const ASPECT_01 = "";
+const ASPECT_02 = "";
+const ASPECT_03 = "";
+const ASPECT_04 = "";
+const ASPECT_05 = "";
+const ASPECT_06 = "";
+const ASPECT_07 = "ORIGINAL";
+const ASPECT_08 = "";
+const ASPECT_09 = "";
+const ASPECT_10 = "";
+const ASPECT_11 = "";
+const ASPECT_12 = "";
+const ASPECT_13 = "";
+const ASPECT_14 = "";
+
+///// END OF INPUT SECTION ///////
+
+
+// Function to get sale status display
+function getSaleStatusHTML() {
+    switch(SALE_STATUS) {
+        case "A":
+            return '<a href="https://www.yahoo.com" target="_blank" class="cart-btn">Inquire to Purchase</a>';
+        case "B":
+            return '<p><strong>Sold</strong></p>';
+        case "C":
+            return '<p><strong>Permanent Collection - Not for Sale</strong></p>';
+        default:
+            return '<a href="https://www.yahoo.com" target="_blank" class="cart-btn">Inquire to Purchase</a>';
+    }
+}
+
+// Function to create image HTML with srcset and aspect ratio control
+function createImageHTML(imageName, aspectOverride = "", isEager = false) {
+    if (!imageName) return "";
+    
+    const loading = isEager ? "" : 'loading="lazy"';
+    const aspectClass = (aspectOverride === "ORIGINAL") ? "original-aspect" : "square-aspect";
+    
+    return `
+        <img srcset="/assets/${imageName}_1000.webp 1000w,
+                     /assets/${imageName}_2400.webp 2400w"
+             sizes="(max-width: 800px) 100vw, 
+                    (max-width: 1200px) 66vw, 
+                    600px"
+             src="/assets/${imageName}_1000.webp" 
+             alt="Product image"
+             class="${aspectClass}"
+             ${loading}>
+    `;
+}
+
+// Function to load header and footer
+async function loadHeaderFooter() {
+  try {
+    const response = await fetch('header-footer.html');
+    const content = await response.text();
+    
+    // Split content by a unique delimiter to separate header and footer
+    const parts = content.split('<!-- FOOTER TEMPLATE -->');
+    const headerContent = parts[0].replace('<!-- HEADER TEMPLATE -->', '');
+    const footerContent = '<!-- FOOTER TEMPLATE -->' + parts[1];
+    
+    // Insert header
+    document.getElementById('header-placeholder').innerHTML = headerContent;
+    
+    // Insert footer at the end of body
+    const footerDiv = document.createElement('div');
+    footerDiv.id = 'footer-placeholder';
+    footerDiv.innerHTML = footerContent.replace('<!-- FOOTER TEMPLATE -->', '');
+    document.body.appendChild(footerDiv);
+    
+  } catch (error) {
+    console.error('Error loading header/footer:', error);
+  }
+}
+</script>
+
+<div class="flexcontainer"> 
+
+<div class="flexleft" id="imageContainer">
+<!-- Images will be populated by JavaScript -->
+</div> 
+
+<div class="flexright"> 
+<h2 id="productTitle"></h2> 
+<p class="p-loose"><strong id="productCode"></strong></p>
+<p><b>Origin: </b><span id="origin"></span></p> 
+<p><b>Materials: </b><span id="materials"></span></p>
+<p class="p-loose"><b>Dimensions: </b><span id="dimensions"></span></p>
+<p id="description"></p>
+<br>
+<div id="saleStatus"></div>
+</div> 
+</div>
+
+<script>
+// Populate content when page loads
+document.addEventListener('DOMContentLoaded', async function() {
+    // Load header and footer first
+    await loadHeaderFooter();
+    
+    // Set text content
+    document.getElementById('productTitle').textContent = PRODUCT_TITLE;
+    document.getElementById('productCode').textContent = PRODUCT_CODE;
+    document.getElementById('origin').textContent = ORIGIN;
+    document.getElementById('materials').textContent = MATERIALS;
+    document.getElementById('dimensions').innerHTML = DIMENSIONS;
+    document.getElementById('description').textContent = DESCRIPTION;
+    document.getElementById('saleStatus').innerHTML = getSaleStatusHTML();
+    
+    // Create image elements
+    const imageContainer = document.getElementById('imageContainer');
+    const imageNames = [IMAGE_01, IMAGE_02, IMAGE_03, IMAGE_04, IMAGE_05, IMAGE_06, IMAGE_07, IMAGE_08, IMAGE_09, IMAGE_10, IMAGE_11, IMAGE_12, IMAGE_13, IMAGE_14];
+    const aspectOverrides = [ASPECT_01, ASPECT_02, ASPECT_03, ASPECT_04, ASPECT_05, ASPECT_06, ASPECT_07, ASPECT_08, ASPECT_09, ASPECT_10, ASPECT_11, ASPECT_12, ASPECT_13, ASPECT_14];
+    
+    imageNames.forEach((imageName, index) => {
+        if (imageName) {
+            const isEager = index < 2; // First two images load immediately
+            const aspectOverride = aspectOverrides[index];
+            imageContainer.innerHTML += createImageHTML(imageName, aspectOverride, isEager);
+        }
+    });
+});
+</script>
+
+<!-- Footer will be loaded here by JavaScript -->
+</body>
+
+</html>
