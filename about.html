@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Discover a curated collection of small vintage wooden stools and primitive furniture at Stool Zoo. Shop timeless, rustic and handcrafted furniture that brings character to any space—boho, minimalist, brutalist or eclectic. Explore our collection today." />
+  
+  <title>Stool Zoo</title>
+  <link rel="icon" type="image/x-icon" href="/img/favicon.ico" />
+  <link rel="stylesheet" href="styles.css" />
+
+  <!-- Twitter Metadata -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Stool Zoo" />
+  <meta name="twitter:description" content="Discover a curated collection of vintage wooden stools, rustic tabourets and primitive seats at Stool Zoo." />
+
+  <!-- Favicons -->
+  <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="shortcut icon" href="/favicon.ico" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <link rel="manifest" href="/site.webmanifest" />
+
+</head>
+
+<body>
+  <!-- Header will be loaded here -->
+  <div id="header-placeholder"></div>
+
+  <script>
+
+    // Function to load header and footer
+    async function loadHeaderFooter() {
+      try {
+        const response = await fetch('header-footer.html');
+        const content = await response.text();
+        
+        // Split content by a unique delimiter to separate header and footer
+        const parts = content.split('<!-- FOOTER TEMPLATE -->');
+        const headerContent = parts[0].replace('<!-- HEADER TEMPLATE -->', '');
+        const footerContent = '<!-- FOOTER TEMPLATE -->' + parts[1];
+        
+        // Insert header
+        document.getElementById('header-placeholder').innerHTML = headerContent;
+        
+        // Insert footer at the end of body
+        const footerDiv = document.createElement('div');
+        footerDiv.id = 'footer-placeholder';
+        footerDiv.innerHTML = footerContent.replace('<!-- FOOTER TEMPLATE -->', '');
+        document.body.appendChild(footerDiv);
+        
+      } catch (error) {
+        console.error('Error loading header/footer:', error);
+      }
+    }
+  </script>
+
+
+  <script>
+    document.addEventListener('DOMContentLoaded', async () => {
+      // Load header and footer first
+      await loadHeaderFooter();
+});
+  
+  </script>
+
+  <!-- Footer will be loaded here by JavaScript -->
+</body>
+</html>
